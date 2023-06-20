@@ -8,15 +8,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class VinylController
 {
     #[Route('/')]
-    public function homepage() 
+    public function homepage(): Response
     {
         return new Response('Title: PB and Jams');
     }
 
-    #[Route('/browse')]
-    public function browse() 
+    #[Route('/browse/{slug}')]
+    public function browse($slug = null): Response
     {
+        if($slug) {
+            $title = 'Genre: '.u(str_replace('-', ' ', $slug))->title(true);
+        } else {
+            $title = "All Genres";
+        }
         return new Response('Breakup vinyl? Angsty 90s rock Browse for collection.');
-        
     }
 }
