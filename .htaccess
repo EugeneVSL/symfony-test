@@ -1,1 +1,13 @@
-DirectoryIndex public
+
+php_flag display_startup_errors on
+php_flag display_errors on
+php_flag html_errors on
+
+<IfModule mod_rewrite.c>
+
+    RewriteEngine ON
+
+    # redirect all requests to public directory
+    RewriteCond %{REQUEST_URI} !symfony-test/
+    RewriteRule (.*) /symfony-test/public/$1 [L]
+</IfModule>
